@@ -11,5 +11,11 @@
 
     <artifactId>staging-center</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.hinton</groupId>
+            <artifactId>staging-base</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 </project>
