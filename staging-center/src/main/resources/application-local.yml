@@ -1,0 +1,46 @@
+server:
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+  servlet:
+    context-path: /v1
+  schema: http
+  port: 8084
+
+
+spring:
+  aop:
+    auto: true
+    proxy-target-class: false
+  datasource:
+    primary:
+      url: jdbc:mysql://127.0.0.1:3306/ops_main?characterEncoding=utf8&serverTimezone=UTC&autoReconnect=true&failOverReadOnly=false&maxReconnects=10&autoReconnectForPools=true&useSSL=false&useUnicode=true&character_set_server=utf8mb4&characterSetResults=utf8
+
+      username: root
+      password: Zk!32465
+      schema:
+      #dbcp2:
+      max-wait-millis: 30000
+      max-idle: 5
+      min-idle: 5
+      max-total: 10
+      initial-size: 2
+      testOnBorrow: true
+      testWhileIdle: true
+      validationQuery: select now()
+
+
+
+
+#common mapper for mybatis
+mapper:
+  identity: MYSQL
+  style: normal
+
+#pagehelper for mybatis
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  rowBoundsWithCount: true

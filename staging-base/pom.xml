@@ -29,7 +29,7 @@
         <dependency>
             <groupId>com.hinton</groupId>
             <artifactId>staging-util</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${stage.version}</version>
         </dependency>
     </dependencies>
 </project>

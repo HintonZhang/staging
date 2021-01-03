@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hinton.staging.test.mapper.CollectionMapper">
+    <insert id="insertCollection">
+           <![CDATA[INSERT INTO collection(collectionId,userId,referenceType,referenceId,isDeleted, created,projectId,enterpriseId) VALUES
+        (#{collectionId},#{userId},#{referenceType},#{referenceId},#{isDeleted},#{created},#{projectId},#{enterpriseId})]]>
+    </insert>
+
+    <update id="deleteCollection">
+        UPDATE   collection   SET   isDeleted = 1   WHERE userId = #{userId} AND referenceId = #{referenceId}  AND referenceType = #{referenceType};
+    </update>
+
+    <update id="deleteCollectionById">
+        UPDATE   collection   SET   isDeleted = 1   WHERE collectionId = #{collectionId};
+    </update>
+    <select id="getUserCollection" resultType="com.hinton.staging.test.entity.Collection">
+        SELECT * FROM collection
+        WHERE isDeleted = 0 AND
+        userId = #{userId} AND referenceType = #{referenceType}
+    </select>
+
+    <select id="getUserMemberCollection" resultType="com.hinton.staging.test.entity.Collection">
+        SELECT * FROM collection
+        WHERE isDeleted = 0 AND
+        userId = #{userId} AND referenceType = 'PROJECT_MEMBER'
+         <if test="projectId > 0">
+          AND projectId = #{projectId}
+         </if>
+    </select>
+
+    <select id="getStaffCollection" resultType="com.hinton.staging.test.entity.Collection">
+        SELECT * FROM collection
+        WHERE isDeleted = 0 AND
+        userId = #{userId} AND referenceType = 'STAFF'
+        <if test="enterpriseId > 0">
+            AND enterpriseId = #{enterpriseId}
+        </if>
+    </select>
+
+    <select id="getOneCollectionByUserAndReferenceId" resultType="com.hinton.staging.test.entity.Collection">
+        SELECT * FROM collection
+        WHERE isDeleted = 0 AND
+         userId = #{userId} AND referenceId = #{referenceId} AND referenceType = #{referenceType}
+          LIMIT 1
+    </select>
+
+    <update id="deleteCollectionByReferenceIdAndReferenceType">
+          UPDATE   collection   SET   isDeleted = 1   WHERE  referenceId = #{referenceId}  AND referenceType = #{referenceType};
+    </update>
+
+
+    <update id="deleteUserCollectionByReferenceIdAndReferenceType">
+          UPDATE   collection   SET   isDeleted = 1   WHERE  referenceId = #{referenceId}  AND referenceType = #{referenceType} AND userId = #{userId};
+    </update>
+</mapper>

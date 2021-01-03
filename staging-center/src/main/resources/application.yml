@@ -1,0 +1,7 @@
+application:
+  product: 脚手架
+spring.devtools.restart.enabled: true
+
+spring:
+  profiles:
+    active: local

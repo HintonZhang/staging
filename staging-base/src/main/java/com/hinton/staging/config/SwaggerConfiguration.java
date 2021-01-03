@@ -69,7 +69,7 @@ public class SwaggerConfiguration {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 //页面标题
-                .title("joc后台api")
+                .title("hinton的脚手架后台")
                 .build();
     }
 
